@@ -1,0 +1,399 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "13e2378c-74ce-4c1f-9726-85b1ae7e5720",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Collecting olap\n",
+      "  Downloading olap-0.3.tar.gz (2.8 kB)\n",
+      "  Installing build dependencies: started\n",
+      "  Installing build dependencies: finished with status 'done'\n",
+      "  Getting requirements to build wheel: started\n",
+      "  Getting requirements to build wheel: finished with status 'done'\n",
+      "  Preparing metadata (pyproject.toml): started\n",
+      "  Preparing metadata (pyproject.toml): finished with status 'done'\n",
+      "Requirement already satisfied: pandas in c:\\users\\nimra\\appdata\\local\\programs\\python\\python312\\lib\\site-packages (2.1.3)\n",
+      "Collecting zope.interface (from olap)\n",
+      "  Obtaining dependency information for zope.interface from https://files.pythonhosted.org/packages/0f/d5/81f9789311d9773a02ed048af7452fc6cedce059748dba956c1dc040340a/zope.interface-6.1-cp312-cp312-win_amd64.whl.metadata\n",
+      "  Downloading zope.interface-6.1-cp312-cp312-win_amd64.whl.metadata (42 kB)\n",
+      "     ---------------------------------------- 0.0/42.8 kB ? eta -:--:--\n",
+      "     ---------------------------------------- 42.8/42.8 kB 2.2 MB/s eta 0:00:00\n",
+      "Collecting zope.schema (from olap)\n",
+      "  Downloading zope.schema-7.0.1-py3-none-any.whl (85 kB)\n",
+      "     ---------------------------------------- 0.0/85.9 kB ? eta -:--:--\n",
+      "     ---------------------------------------- 0.0/85.9 kB ? eta -:--:--\n",
+      "     ---- ----------------------------------- 10.2/85.9 kB ? eta -:--:--\n",
+      "     ---- ----------------------------------- 10.2/85.9 kB ? eta -:--:--\n",
+      "     ---- ----------------------------------- 10.2/85.9 kB ? eta -:--:--\n",
+      "     ---- ----------------------------------- 10.2/85.9 kB ? eta -:--:--\n",
+      "     ---- ----------------------------------- 10.2/85.9 kB ? eta -:--:--\n",
+      "     ---- ----------------------------------- 10.2/85.9 kB ? eta -:--:--\n",
+      "     ---- ----------------------------------- 10.2/85.9 kB ? eta -:--:--\n",
+      "     ---- ----------------------------------- 10.2/85.9 kB ? eta -:--:--\n",
+      "     ---- ----------------------------------- 10.2/85.9 kB ? eta -:--:--\n",
+      "     ---- ----------------------------------- 10.2/85.9 kB ? eta -:--:--\n",
+      "     ------------------ -------------------- 41.0/85.9 kB 67.8 kB/s eta 0:00:01\n",
+      "     ------------------ -------------------- 41.0/85.9 kB 67.8 kB/s eta 0:00:01\n",
+      "     ------------------ -------------------- 41.0/85.9 kB 67.8 kB/s eta 0:00:01\n",
+      "     --------------------------- ----------- 61.4/85.9 kB 88.6 kB/s eta 0:00:01\n",
+      "     --------------------------- ----------- 61.4/85.9 kB 88.6 kB/s eta 0:00:01\n",
+      "     -------------------------------- ------ 71.7/85.9 kB 89.4 kB/s eta 0:00:01\n",
+      "     -------------------------------------- 85.9/85.9 kB 103.0 kB/s eta 0:00:00\n",
+      "Requirement already satisfied: numpy<2,>=1.26.0 in c:\\users\\nimra\\appdata\\local\\programs\\python\\python312\\lib\\site-packages (from pandas) (1.26.2)\n",
+      "Requirement already satisfied: python-dateutil>=2.8.2 in c:\\users\\nimra\\appdata\\local\\programs\\python\\python312\\lib\\site-packages (from pandas) (2.8.2)\n",
+      "Requirement already satisfied: pytz>=2020.1 in c:\\users\\nimra\\appdata\\local\\programs\\python\\python312\\lib\\site-packages (from pandas) (2023.3.post1)\n",
+      "Requirement already satisfied: tzdata>=2022.1 in c:\\users\\nimra\\appdata\\local\\programs\\python\\python312\\lib\\site-packages (from pandas) (2023.3)\n",
+      "Requirement already satisfied: six>=1.5 in c:\\users\\nimra\\appdata\\local\\programs\\python\\python312\\lib\\site-packages (from python-dateutil>=2.8.2->pandas) (1.16.0)\n",
+      "Requirement already satisfied: setuptools in c:\\users\\nimra\\appdata\\local\\programs\\python\\python312\\lib\\site-packages (from zope.interface->olap) (69.0.2)\n",
+      "Collecting zope.event (from zope.schema->olap)\n",
+      "  Obtaining dependency information for zope.event from https://files.pythonhosted.org/packages/fe/42/f8dbc2b9ad59e927940325a22d6d3931d630c3644dae7e2369ef5d9ba230/zope.event-5.0-py3-none-any.whl.metadata\n",
+      "  Downloading zope.event-5.0-py3-none-any.whl.metadata (4.4 kB)\n",
+      "Downloading zope.interface-6.1-cp312-cp312-win_amd64.whl (204 kB)\n",
+      "   ---------------------------------------- 0.0/204.3 kB ? eta -:--:--\n",
+      "   ---------------------------------------- 0.0/204.3 kB ? eta -:--:--\n",
+      "   -- ------------------------------------- 10.2/204.3 kB ? eta -:--:--\n",
+      "   -- ------------------------------------- 10.2/204.3 kB ? eta -:--:--\n",
+      "   -- ------------------------------------- 10.2/204.3 kB ? eta -:--:--\n",
+      "   ----- --------------------------------- 30.7/204.3 kB 163.8 kB/s eta 0:00:02\n",
+      "   ----- --------------------------------- 30.7/204.3 kB 163.8 kB/s eta 0:00:02\n",
+      "   ------- ------------------------------- 41.0/204.3 kB 140.3 kB/s eta 0:00:02\n",
+      "   ----------- --------------------------- 61.4/204.3 kB 172.4 kB/s eta 0:00:01\n",
+      "   ----------- --------------------------- 61.4/204.3 kB 172.4 kB/s eta 0:00:01\n",
+      "   ----------- --------------------------- 61.4/204.3 kB 172.4 kB/s eta 0:00:01\n",
+      "   ------------- ------------------------- 71.7/204.3 kB 151.3 kB/s eta 0:00:01\n",
+      "   ------------- ------------------------- 71.7/204.3 kB 151.3 kB/s eta 0:00:01\n",
+      "   ------------- ------------------------- 71.7/204.3 kB 151.3 kB/s eta 0:00:01\n",
+      "   ------------- ------------------------- 71.7/204.3 kB 151.3 kB/s eta 0:00:01\n",
+      "   ------------- ------------------------- 71.7/204.3 kB 151.3 kB/s eta 0:00:01\n",
+      "   ------------- ------------------------- 71.7/204.3 kB 151.3 kB/s eta 0:00:01\n",
+      "   ------------- ------------------------- 71.7/204.3 kB 151.3 kB/s eta 0:00:01\n",
+      "   ------------- ------------------------- 71.7/204.3 kB 151.3 kB/s eta 0:00:01\n",
+      "   ------------- ------------------------- 71.7/204.3 kB 151.3 kB/s eta 0:00:01\n",
+      "   ------------------ --------------------- 92.2/204.3 kB 97.1 kB/s eta 0:00:02\n",
+      "   ------------------ --------------------- 92.2/204.3 kB 97.1 kB/s eta 0:00:02\n",
+      "   ------------------ --------------------- 92.2/204.3 kB 97.1 kB/s eta 0:00:02\n",
+      "   ------------------ --------------------- 92.2/204.3 kB 97.1 kB/s eta 0:00:02\n",
+      "   ------------------ --------------------- 92.2/204.3 kB 97.1 kB/s eta 0:00:02\n",
+      "   ------------------ --------------------- 92.2/204.3 kB 97.1 kB/s eta 0:00:02\n",
+      "   ------------------ --------------------- 92.2/204.3 kB 97.1 kB/s eta 0:00:02\n",
+      "   ------------------ --------------------- 92.2/204.3 kB 97.1 kB/s eta 0:00:02\n",
+      "   --------------------- ----------------- 112.6/204.3 kB 84.0 kB/s eta 0:00:02\n",
+      "   ----------------------- --------------- 122.9/204.3 kB 90.1 kB/s eta 0:00:01\n",
+      "   ----------------------- --------------- 122.9/204.3 kB 90.1 kB/s eta 0:00:01\n",
+      "   ----------------------- --------------- 122.9/204.3 kB 90.1 kB/s eta 0:00:01\n",
+      "   ----------------------- --------------- 122.9/204.3 kB 90.1 kB/s eta 0:00:01\n",
+      "   ----------------------- --------------- 122.9/204.3 kB 90.1 kB/s eta 0:00:01\n",
+      "   ----------------------- --------------- 122.9/204.3 kB 90.1 kB/s eta 0:00:01\n",
+      "   --------------------------- ----------- 143.4/204.3 kB 87.8 kB/s eta 0:00:01\n",
+      "   --------------------------- ----------- 143.4/204.3 kB 87.8 kB/s eta 0:00:01\n",
+      "   --------------------------- ----------- 143.4/204.3 kB 87.8 kB/s eta 0:00:01\n",
+      "   --------------------------- ----------- 143.4/204.3 kB 87.8 kB/s eta 0:00:01\n",
+      "   ----------------------------- --------- 153.6/204.3 kB 82.7 kB/s eta 0:00:01\n",
+      "   ----------------------------- --------- 153.6/204.3 kB 82.7 kB/s eta 0:00:01\n",
+      "   ----------------------------- --------- 153.6/204.3 kB 82.7 kB/s eta 0:00:01\n",
+      "   ----------------------------- --------- 153.6/204.3 kB 82.7 kB/s eta 0:00:01\n",
+      "   --------------------------------- ----- 174.1/204.3 kB 85.2 kB/s eta 0:00:01\n",
+      "   --------------------------------- ----- 174.1/204.3 kB 85.2 kB/s eta 0:00:01\n",
+      "   --------------------------------- ----- 174.1/204.3 kB 85.2 kB/s eta 0:00:01\n",
+      "   --------------------------------- ----- 174.1/204.3 kB 85.2 kB/s eta 0:00:01\n",
+      "   ------------------------------------- - 194.6/204.3 kB 86.7 kB/s eta 0:00:01\n",
+      "   ------------------------------------- - 194.6/204.3 kB 86.7 kB/s eta 0:00:01\n",
+      "   --------------------------------------- 204.3/204.3 kB 88.1 kB/s eta 0:00:00\n",
+      "Downloading zope.event-5.0-py3-none-any.whl (6.8 kB)\n",
+      "Building wheels for collected packages: olap\n",
+      "  Building wheel for olap (pyproject.toml): started\n",
+      "  Building wheel for olap (pyproject.toml): finished with status 'done'\n",
+      "  Created wheel for olap: filename=olap-0.3-py3-none-any.whl size=3532 sha256=0e628de2c6046293af3a4435c88d6e4ef44a471aba07996b356f910559dc0b84\n",
+      "  Stored in directory: c:\\users\\nimra\\appdata\\local\\pip\\cache\\wheels\\bc\\df\\29\\ed4730a048217df8ad86c6c25d6c2f5d99242c31c2a83c278c\n",
+      "Successfully built olap\n",
+      "Installing collected packages: zope.interface, zope.event, zope.schema, olap\n",
+      "Successfully installed olap-0.3 zope.event-5.0 zope.interface-6.1 zope.schema-7.0.1\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "[notice] A new release of pip is available: 23.2.1 -> 23.3.2\n",
+      "[notice] To update, run: python.exe -m pip install --upgrade pip\n"
+     ]
+    }
+   ],
+   "source": [
+    "!pip install olap pandas"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "524a570e-2c8f-4caa-be1e-b238055b7b94",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['C:\\\\Users\\\\nimra', 'C:\\\\Users\\\\nimra\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python312.zip', 'C:\\\\Users\\\\nimra\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\DLLs', 'C:\\\\Users\\\\nimra\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\Lib', 'C:\\\\Users\\\\nimra\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312', '', 'C:\\\\Users\\\\nimra\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\nimra\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\Lib\\\\site-packages\\\\win32', 'C:\\\\Users\\\\nimra\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\Lib\\\\site-packages\\\\win32\\\\lib', 'C:\\\\Users\\\\nimra\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\Lib\\\\site-packages\\\\Pythonwin']\n"
+     ]
+    }
+   ],
+   "source": [
+    "import pandas as pd\n",
+    "from sys import path \n",
+    "print (path)\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "9c3b86fc-12f0-46ae-a912-090671d39426",
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "ModuleNotFoundError",
+     "evalue": "No module named 'pydatacube'",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[1;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[1;31mModuleNotFoundError\u001b[0m                       Traceback (most recent call last)",
+      "Cell \u001b[1;32mIn[10], line 1\u001b[0m\n\u001b[1;32m----> 1\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mpydatacube\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m Cube\n\u001b[0;32m      3\u001b[0m \u001b[38;5;66;03m# Replace 'your_server', 'your_database', 'your_cube_name' with your actual values\u001b[39;00m\n\u001b[0;32m      4\u001b[0m connection_string \u001b[38;5;241m=\u001b[39m (\n\u001b[0;32m      5\u001b[0m     \u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mProvider=MSOLAP;\u001b[39m\u001b[38;5;124m\"\u001b[39m\n\u001b[0;32m      6\u001b[0m     \u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mData Source=your_server;\u001b[39m\u001b[38;5;124m\"\u001b[39m\n\u001b[0;32m      7\u001b[0m     \u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mInitial Catalog=your_database;\u001b[39m\u001b[38;5;124m\"\u001b[39m\n\u001b[0;32m      8\u001b[0m     \u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mCube=your_cube_name;\u001b[39m\u001b[38;5;124m\"\u001b[39m\n\u001b[0;32m      9\u001b[0m )\n",
+      "\u001b[1;31mModuleNotFoundError\u001b[0m: No module named 'pydatacube'"
+     ]
+    }
+   ],
+   "source": [
+    "Import pydatacube\n",
+    "from pydatacube import Cube\n",
+    "\n",
+    "# Replace 'your_server', 'your_database', 'your_cube_name' with your actual values\n",
+    "connection_string = (\n",
+    "    \"Provider=49.12.92.12,54321;\"\n",
+    "    \"Data Source= jeeny_new;\"\n",
+    "    \"Initial Catalog=jeeny_new;\"\n",
+    "    \"Cube=your_cube_name;\"\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "4fe087c5-9f25-4e82-881b-36feb29f3080",
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "ModuleNotFoundError",
+     "evalue": "No module named 'pydatacube'",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[1;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[1;31mModuleNotFoundError\u001b[0m                       Traceback (most recent call last)",
+      "Cell \u001b[1;32mIn[11], line 1\u001b[0m\n\u001b[1;32m----> 1\u001b[0m \u001b[38;5;28;01mimport\u001b[39;00m \u001b[38;5;21;01mpydatacube\u001b[39;00m\n\u001b[0;32m      2\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mpydatacube\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m Cube\n",
+      "\u001b[1;31mModuleNotFoundError\u001b[0m: No module named 'pydatacube'"
+     ]
+    }
+   ],
+   "source": [
+    "import pydatacube\n",
+    "from pydatacube import Cube"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "ad512ac4-1940-446f-9798-ebd2035138ad",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Note: you may need to restart the kernel to use updated packages.\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "ERROR: Could not find a version that satisfies the requirement pydatacube (from versions: none)\n",
+      "ERROR: No matching distribution found for pydatacube\n",
+      "\n",
+      "[notice] A new release of pip is available: 23.2.1 -> 23.3.2\n",
+      "[notice] To update, run: python.exe -m pip install --upgrade pip\n"
+     ]
+    }
+   ],
+   "source": [
+    "pip install pydatacube"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "8f697fd5-0400-4b78-abb5-ab46ca1b986d",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Note: you may need to restart the kernel to use updated packages.\n",
+      "Collecting pyolap\n",
+      "  Obtaining dependency information for pyolap from https://files.pythonhosted.org/packages/68/25/019c4197a83a797c9df2254a790b4cda28a6c3c4f3efe682b22860ad6a63/pyolap-0.1.6-py3-none-any.whl.metadata\n",
+      "  Downloading pyolap-0.1.6-py3-none-any.whl.metadata (276 bytes)\n",
+      "Requirement already satisfied: wcwidth in c:\\users\\nimra\\appdata\\local\\programs\\python\\python312\\lib\\site-packages (from pyolap) (0.2.12)\n",
+      "Downloading pyolap-0.1.6-py3-none-any.whl (12 kB)\n",
+      "Installing collected packages: pyolap\n",
+      "Successfully installed pyolap-0.1.6\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "[notice] A new release of pip is available: 23.2.1 -> 23.3.2\n",
+      "[notice] To update, run: python.exe -m pip install --upgrade pip\n"
+     ]
+    }
+   ],
+   "source": [
+    "pip install pyolap"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "f09ad87b-cf12-4179-a28d-4e2580a52390",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pyolap"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "def9e5ca-5de5-4876-836f-edb0c9690bbe",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "connection_string = (\n",
+    "    \"Provider=MSOLAP;\"\n",
+    "    \"Data Source=49.12.92.12,54321;\"\n",
+    "    \"Initial Catalog=jeeny_new;\"\n",
+    "    \"Cube=jeeny_new;\"\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "a4c3e121-1df2-4760-a58b-918fb0f0b581",
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "ename": "AttributeError",
+     "evalue": "module 'pyolap' has no attribute 'Connection'",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[1;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[1;31mAttributeError\u001b[0m                            Traceback (most recent call last)",
+      "Cell \u001b[1;32mIn[7], line 9\u001b[0m\n\u001b[0;32m      2\u001b[0m connection_string \u001b[38;5;241m=\u001b[39m (\n\u001b[0;32m      3\u001b[0m     \u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mProvider=MSOLAP;\u001b[39m\u001b[38;5;124m\"\u001b[39m\n\u001b[0;32m      4\u001b[0m     \u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mData Source=49.12.92.12,54321;\u001b[39m\u001b[38;5;124m\"\u001b[39m\n\u001b[0;32m      5\u001b[0m     \u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mInitial Catalog=YourSSASDatabaseName;\u001b[39m\u001b[38;5;124m\"\u001b[39m\n\u001b[0;32m      6\u001b[0m )\n\u001b[0;32m      8\u001b[0m \u001b[38;5;66;03m# Establish the connection\u001b[39;00m\n\u001b[1;32m----> 9\u001b[0m connection \u001b[38;5;241m=\u001b[39m \u001b[43mpyolap\u001b[49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43mConnection\u001b[49m(connection_string)\n",
+      "\u001b[1;31mAttributeError\u001b[0m: module 'pyolap' has no attribute 'Connection'"
+     ]
+    }
+   ],
+   "source": [
+    "# Replace '49.12.92.12,54321', 'jeeny_new', 'YourCubeName' with your actual values\n",
+    "connection_string = (\n",
+    "    \"Provider=MSOLAP;\"\n",
+    "    \"Data Source=49.12.92.12,54321;\"\n",
+    "    \"Initial Catalog=YourSSASDatabaseName;\"\n",
+    ")\n",
+    "\n",
+    "# Establish the connection\n",
+    "connection = pyolap.Connection(connection_string)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "2bb27c28-6c38-45fb-b459-1e1e3d9a9ea2",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pyodbc\n",
+    "\n",
+    "# Replace '49.12.92.12,54321', 'nimra_ayaz', '9j3lzX9DrL' with your actual values\n",
+    "connection_string = (\n",
+    "    \"DRIVER={ODBC Driver 17 for SQL Server};\"\n",
+    "    \"SERVER=49.12.92.12,54321;\"\n",
+    "    \"UID=nimra_ayaz;\"\n",
+    "    \"PWD=9j3lzX9DrL;\"\n",
+    "    \"DATABASE= JEENYNEW;\"\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "7c3c7815-ccf7-4b54-b94e-e1ccabc3688e",
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "OperationalError",
+     "evalue": "('08001', '[08001] [Microsoft][ODBC Driver 17 for SQL Server]Client unable to establish connection because an error was encountered during handshakes before login. Common causes include client attempting to connect to an unsupported version of SQL Server, server too busy to accept new connections or a resource limitation (memory or maximum allowed connections) on the server. (26) (SQLDriverConnect); [08001] [Microsoft][ODBC Driver 17 for SQL Server]TCP Provider: An existing connection was forcibly closed by the remote host.\\r\\n (10054); [08001] [Microsoft][ODBC Driver 17 for SQL Server]Client unable to establish connection (26); [08001] [Microsoft][ODBC Driver 17 for SQL Server]Client unable to establish connection due to prelogin failure (10054)')",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[1;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[1;31mOperationalError\u001b[0m                          Traceback (most recent call last)",
+      "Cell \u001b[1;32mIn[11], line 1\u001b[0m\n\u001b[1;32m----> 1\u001b[0m connection \u001b[38;5;241m=\u001b[39m \u001b[43mpyodbc\u001b[49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43mconnect\u001b[49m\u001b[43m(\u001b[49m\u001b[43mconnection_string\u001b[49m\u001b[43m)\u001b[49m\n",
+      "\u001b[1;31mOperationalError\u001b[0m: ('08001', '[08001] [Microsoft][ODBC Driver 17 for SQL Server]Client unable to establish connection because an error was encountered during handshakes before login. Common causes include client attempting to connect to an unsupported version of SQL Server, server too busy to accept new connections or a resource limitation (memory or maximum allowed connections) on the server. (26) (SQLDriverConnect); [08001] [Microsoft][ODBC Driver 17 for SQL Server]TCP Provider: An existing connection was forcibly closed by the remote host.\\r\\n (10054); [08001] [Microsoft][ODBC Driver 17 for SQL Server]Client unable to establish connection (26); [08001] [Microsoft][ODBC Driver 17 for SQL Server]Client unable to establish connection due to prelogin failure (10054)')"
+     ]
+    }
+   ],
+   "source": [
+    "connection = pyodbc.connect(connection_string)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "3a5c0cd1-b884-4ecd-8c01-fb5f77e0aa21",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.0"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
